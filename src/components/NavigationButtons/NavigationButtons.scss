@@ -1,0 +1,93 @@
+@import '../../styles/variables';
+
+.navigation-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    margin-left: 1.2rem;
+  }
+
+  &__main-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+  }
+
+  &__date {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 15px;
+    order: 2;
+    margin-top: 1rem;
+
+    @media (max-width: 768px) {
+      gap: 5px;
+      margin-top: 0;
+    }
+  }
+
+  &__button {
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba($primary-color, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover:not(:disabled) {
+      background: white;
+    }
+
+    &:disabled {
+      border: 2px solid rgba($primary-color, 0.1);
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+      width: 25px;
+      height: 25px;
+      font-size: 10px;
+    }
+  }
+
+  &__points {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation-buttons {
+    &__points {
+      display: flex;
+      gap: 5px;
+    }
+    &__point {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: none;
+      background-color: rgba($primary-color, 0.1);
+      cursor: pointer;
+      padding: 0;
+
+      &:hover {
+        background-color: rgba($primary-color, 0.4);
+      }
+
+      &--active {
+        background-color: $primary-color;
+      }
+    }
+  }
+}

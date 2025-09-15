@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.circle-date {
+  display: flex;
+  gap: 30px;
+
+  &--start {
+    color: $timeline-start;
+  }
+
+  &--end {
+    color: $timeline-end;
+  }
+
+  @media (max-width: 768px) {
+    gap: 20px;
+  }
+}

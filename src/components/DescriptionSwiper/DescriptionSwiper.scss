@@ -1,0 +1,128 @@
+@import '../../styles/variables';
+
+.description-swiper {
+  margin-top: -2rem;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 20px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+
+  opacity: 0;
+  // transition: opacity 0.4s ease;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__container {
+    flex: 1;
+    padding: 20px 0 50px;
+    position: relative;
+    width: 100%;
+
+    .swiper-wrapper {
+      display: flex;
+    }
+
+    .swiper-slide {
+      width: auto;
+      height: auto;
+    }
+  }
+}
+
+.description-card {
+  padding: 1.5rem;
+  height: 100%;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 300px;
+  max-width: 350px;
+
+  @media (max-width: 768px) {
+    min-width: 200px;
+  }
+
+  &__description {
+    color: $primary-color;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  &__year {
+    margin: 0;
+    color: $timeline-start;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.custom-arrow {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba($primary-color, 0.3);
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+
+  &.disabled {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .description-swiper {
+    margin-top: 2rem;
+    padding: 0 10px;
+  }
+
+  .description-card {
+    height: 100px;
+    padding: 1rem;
+
+    h4 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.swiper {
+  padding: 0;
+
+  @media (max-width: 768px) {
+    border-top: 1px solid rgba($primary-color, 0.3);
+  }
+}
