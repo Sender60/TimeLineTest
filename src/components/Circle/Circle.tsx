@@ -11,16 +11,19 @@ interface CircleProps {
   timelineData: TimelineItem[];
 }
 
+const MOBILE_BREAKPOINT = 768;
+const RADIUS = 265;
+const INITIAL_ANGLE_OFFSET = 300;
+
 export const Circle: React.FC<CircleProps> = ({ timelineData }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const circleRef = useRef<HTMLDivElement>(null);
   const angleStep = 360 / timelineData.length;
-  const radius = 265;
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    const checkMobile = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -28,8 +31,8 @@ export const Circle: React.FC<CircleProps> = ({ timelineData }) => {
 
   useEffect(() => {
     if (!isMobile && !isInitialized) {
-      const initialRotation = 300 - activeIndex * angleStep;
-      gsap.set('.circle', { rotation: initialRotation });
+      const initialRotation = INITIAL_ANGLE_OFFSET - activeIndex * angleStep;
+      gsap.set(circleRef.current, { rotation: initialRotation });
       gsap.set('.circle-point, .circle-date', { rotation: -initialRotation });
       setIsInitialized(true);
     }
@@ -38,9 +41,9 @@ export const Circle: React.FC<CircleProps> = ({ timelineData }) => {
   const handleItemClick = (index: number) => {
     setActiveIndex(index);
     if (!isMobile) {
-      const targetRotation = 300 - index * angleStep;
+      const targetRotation = INITIAL_ANGLE_OFFSET - index * angleStep;
 
-      gsap.to('.circle', {
+      gsap.to(circleRef.current, {
         rotation: targetRotation,
         duration: 1,
         ease: 'power2.out',
@@ -74,13 +77,13 @@ export const Circle: React.FC<CircleProps> = ({ timelineData }) => {
         </>
       ) : (
         <>
-          <div className="circle-container" ref={circleRef}>
-            <div className="circle">
+          <div className="circle-container">
+            <div className="circle" ref={circleRef}>
               <CircleYear startYear={timelineData[activeIndex].start} endYear={timelineData[activeIndex].end} />
               {timelineData.map((item, index) => {
                 const angle = index * angleStep;
-                const x = Math.cos((angle * Math.PI) / 180) * radius;
-                const y = Math.sin((angle * Math.PI) / 180) * radius;
+                const x = Math.cos((angle * Math.PI) / 180) * RADIUS;
+                const y = Math.sin((angle * Math.PI) / 180) * RADIUS;
 
                 return <CirclePoint key={item.id} item={item} index={index} activeIndex={activeIndex} x={x} y={y} onClick={handleItemClick} />;
               })}

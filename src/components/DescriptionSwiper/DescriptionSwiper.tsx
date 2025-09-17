@@ -53,7 +53,7 @@ const DescriptionSwiper: React.FC<DescriptionSwiperProps> = ({ activeItem }) => 
           slidesPerView={'auto'}
           onSwiper={(swiper: SwiperType) => {
             swiperRef.current = swiper;
-            setTimeout(updateArrowsVisibility, 100);
+            requestAnimationFrame(updateArrowsVisibility);
           }}
           onSlideChange={updateSwiperState}
           onResize={updateArrowsVisibility}
